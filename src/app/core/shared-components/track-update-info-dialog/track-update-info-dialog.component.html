@@ -1,0 +1,44 @@
+
+<mat-dialog-content>
+    <form [formGroup]="trackForm" aria-labelledby="trackFormTitle">
+        <h2 id="trackFormTitle">Nuevo Video</h2>
+        <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Autor</mat-label>
+            <input matInput formControlName="author" placeholder="Ingrese el autor" aria-required="true">
+            <mat-error *ngIf="trackForm.get('author')?.hasError('required')">
+                El autor es obligatorio
+            </mat-error>
+            <mat-error *ngIf="trackForm.get('author')?.hasError('maxlength')">
+                No puede superar los 50 caracteres
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Título</mat-label>
+            <input matInput formControlName="title" placeholder="Ingrese el título" aria-required="true">
+            <mat-error *ngIf="trackForm.get('title')?.hasError('required')">
+                El título es obligatorio
+            </mat-error>
+            <mat-error *ngIf="trackForm.get('title')?.hasError('maxlength')">
+                No puede superar los 100 caracteres
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="full-width">
+            <mat-label>URL</mat-label>
+            <input matInput formControlName="url" placeholder="Ingrese la URL del track" type="url" aria-required="true">
+            <mat-error *ngIf="trackForm.get('url')?.hasError('required')">
+                La URL es obligatoria
+            </mat-error>
+            <mat-error *ngIf="trackForm.get('url')?.hasError('pattern')">
+                Ingrese una URL válida (http o https)
+            </mat-error>
+        </mat-form-field>
+        <div class="form-buttons-container">
+            <button mat-raised-button color="accent" (click)="closeDialog()">
+                Salir
+            </button>
+            <button mat-raised-button color="primary" type="submit" [disabled]="trackForm.invalid" (click)="sendInfoDialog()">
+                Guardar
+            </button>
+        </div>
+    </form>
+</mat-dialog-content>

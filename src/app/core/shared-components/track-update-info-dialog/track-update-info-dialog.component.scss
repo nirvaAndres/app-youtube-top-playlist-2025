@@ -1,0 +1,21 @@
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+}
+
+.form-buttons-container {
+    display: flex;
+    gap: 8px;
+
+    button:nth-of-type(1){
+        background-color: rgb(143, 143, 208);
+        color: #ffffff;
+    }
+
+    button {
+        min-width: 100px;
+    }
+} 

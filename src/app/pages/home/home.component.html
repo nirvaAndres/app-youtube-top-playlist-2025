@@ -1,0 +1,110 @@
+<main>
+    <header>
+        <img src="assets/images/youtube.svg" alt="Logotipo de youtube" aria-hidden="true">
+        <h1 id="usersTableTitle">Top Playlist 2025</h1>
+        <mat-form-field appearance="outline" class="filter" floatLabel="always">
+            <mat-label>Filtrar registros</mat-label>
+            <input matInput (keyup)="applyFilter($event)" name="search" maxlength="50" [disabled]="spinnerService.isLoading()" placeholder="Buscar por nombre" aria-label="Campo de búsqueda de registros"/>
+        </mat-form-field>
+    </header>
+    <section class="yt-table" role="region" aria-labelledby="usersTableTitle" *ngIf="!spinnerService.isLoading()">   
+        <button mat-raised-button color="accent" aria-label="Agregar nuevo registro" (click)="createTrackDialog()">
+            <mat-icon aria-hidden="true">add</mat-icon>
+            Nuevo
+        </button> 
+        <table class="yt-table__container" mat-table [dataSource]="dataSource" matSort  aria-label="Tabla de usuarios con opciones de ver, editar y eliminar">
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef id="th-id" scope="col" aria-label="Identificador del usuario">
+                    ID
+                </th>
+                <td mat-cell *matCellDef="let track" headers="th-id">
+                    {{ track.id }}
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="author">
+                <th mat-header-cell *matHeaderCellDef id="th-author" scope="col">
+                    Autor
+                </th>
+                <td mat-cell *matCellDef="let track" headers="th-author">
+                    {{ track.author }}
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="title">
+                <th mat-header-cell *matHeaderCellDef id="th-title" scope="col">
+                    Titulo
+                </th>
+                <td mat-cell *matCellDef="let track" headers="th-title">
+                    {{ track.title }}
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef id="th-actions" scope="col">
+                    Acciones
+                </th>
+                <td mat-cell *matCellDef="let track" headers="th-actions">
+                    <button mat-icon-button color="primary"  [attr.aria-label]="'Ver detalles de ' + track.author" (click)="showTrackInfo(track)" >
+                        <mat-icon>visibility</mat-icon>
+                        <span class="sr-only">Ver detalles</span>
+                    </button>
+                    <button mat-icon-button color="accent"  [attr.aria-label]="'Editar usuario ' + track.author" (click)="editTrackDialog(track)">
+                        <mat-icon>edit</mat-icon>
+                        <span class="sr-only">Editar</span>
+                    </button>
+                    <button mat-icon-button color="warn" [attr.aria-label]="'Eliminar usuario '+  track.author" (click)="deleteTrack(track.id)">
+                        <mat-icon>delete</mat-icon>
+                        <span class="sr-only">Eliminar</span>
+                    </button>
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns" role="row"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns" role="row" [attr.aria-label]="'Track ' + row.author"></tr>
+        </table>
+        <ul class="yt-table__listRegister">
+            <li  *ngFor="let track of filteredData.slice(paginator.pageIndex * rowPerPage, paginator.pageIndex * rowPerPage + rowPerPage)"> 
+                <mat-card  aria-labelledby="userCardTitle">
+                    <mat-card-header>
+                        <mat-card-title id="userCardTitle">{{ track.author }}</mat-card-title>
+                        <mat-card-subtitle>{{ track.title }}</mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Opciones adicionales">
+                            <mat-icon aria-hidden="true">more_vert</mat-icon>
+                        </button>
+                    </mat-card-content>
+                </mat-card>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item  [attr.aria-label]="'Ver detalles de ' + track.author" (click)="showTrackInfo(track)">
+                        <mat-icon>visibility</mat-icon>
+                        <small>Ver</small>
+                    </button>
+                    <button mat-menu-item  [attr.aria-label]="'Editar ' + track.author" (click)="editTrackDialog(track)">
+                        <mat-icon>edit</mat-icon>
+                        <small>Editar</small>
+                    </button>
+                    <button mat-menu-item  [attr.aria-label]="'Eliminar ' + track.author" (click)="deleteTrack(track.id)">
+                        <mat-icon>delete</mat-icon>
+                        <small>Eliminar</small>
+                    </button>
+                </mat-menu>
+            </li>
+        </ul>
+       <mat-paginator 
+            class="yt-table__paginator" 
+            aria-label="Paginador de tabla de playlist"
+            #paginator
+            [length]="totalItemsTable"
+            [pageSize]="rowPerPage"
+            [pageSizeOptions]="totalPageSizeOptions"
+            showFirstLastButtons
+            (page)="onPageChange($event)"
+        >
+        </mat-paginator>
+    </section>
+    <div class="spinner-overlay" *ngIf="spinnerService.isLoading()">
+      <mat-progress-spinner
+        mode="indeterminate"
+        color="primary">
+      </mat-progress-spinner>
+      <p>Espere, por favor. En este momento se está solicitando información de un servidor gratuito y tarda un poco en responder cuando han pasado minutos de inactividad.</p>
+    </div>
+</main>

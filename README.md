@@ -1,59 +1,55 @@
-# AppTestTechnical
+# 🎵 YouTube Playlist CRUD Web App
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.16.
+[![Angular](https://img.shields.io/badge/Angular-19.2.18-red)](https://angular.io/)
+[![Node.js](https://img.shields.io/badge/Node.js-24.2.0-green)](https://nodejs.org/)
+[![npm](https://img.shields.io/badge/npm-11.3.0-blue)](https://www.npmjs.com/)
 
-## Development server
+---
 
-To start a local development server, run:
+## 📌 Descripción
+Esta es una **Web App** desarrollada con **Angular CLI v19.2.18**, utilizando **Node.js v24.2.0** y **npm v11.3.0**.  
+La aplicación permite realizar un **CRUD de registros de videos de YouTube** utilizando **DataTable y Paginator de Angular Material**.  
 
-```bash
-ng serve
-```
+Los datos provienen de un **servidor backend alojado en Render**, por lo que la primera respuesta puede tardar unos segundos si el servidor estuvo inactivo.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+**URL del backend:**  
+[https://api-playlist-top-2025.onrender.com/api/songs](https://api-playlist-top-2025.onrender.com/api/songs)
 
-## Code scaffolding
+---
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## 💻 Tecnologías utilizadas
+- **Frontend:** Angular CLI v19.2.18, Angular Material  
+- **Backend:** Node.js v24.2.0  
+- **Gestor de paquetes:** npm v11.3.0  
 
-```bash
-ng generate component component-name
-```
+## ✨ Características
+- Visualización de videos de YouTube en **iframe**  
+- **CRUD completo**: Crear, leer, actualizar y eliminar registros  
+- **Tabla dinámica** con **paginación** y **búsqueda** usando Angular Material  
+- Conexión a backend externo alojado en Render  
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
 
-```bash
-ng generate --help
-```
+## 🚀 Instalación y ejecución
+1. Clonar el repositorio:
+   ```bash
+   git clone 
+   
+2. Entrar en la carpeta:
+   cd
 
-## Building
+3. npm install
 
-To build the project run:
+4. ng serve
 
-```bash
-ng build
-```
+⚠️ Nota: El backend está alojado en Render. Si la aplicación no responde de inmediato, es posible que el servidor necesite “despertar” después de un periodo de inactividad, lo que puede generar un pequeño retraso en la carga inicial de los datos.
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+📬 Contacto
 
-## Running unit tests
+Desarrollador: Andres Medina
+Email: andresdmm25@gmail.com
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
 
-```bash
-ng test
-```
 
-## Running end-to-end tests
 
-For end-to-end (e2e) testing, run:
 
-```bash
-ng e2e
-```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
